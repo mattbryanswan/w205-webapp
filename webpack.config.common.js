@@ -6,7 +6,7 @@ module.exports = {
     },
 
     resolve: {
-        extensions: [',js', '.ts']
+        extensions: ['.js', '.ts']
     },
 
     module: {
@@ -24,9 +24,17 @@ module.exports = {
                 loader: 'html-loader'
             },
             {
-                test: /.css/,
+                test: /\.css$/,
                 loader: 'raw-loader'
             }
         ]
-    }
+    },
+
+    plugins: [
+        new webpack.ContextReplacementPlugin(
+            /angular(\\|\/)core(\\|\/)(esm(\\|\/)src|src)(\\|\/)linker/,
+            './src'
+        )
+    ]
+
 };
